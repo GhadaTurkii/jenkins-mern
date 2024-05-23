@@ -7,7 +7,11 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh "source ${NVM_DIR}/nvm.sh && npm install"
+                sh '''
+                    export NVM_DIR="/home/vagrant/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                    npm install
+                '''
             }
         }
     }
